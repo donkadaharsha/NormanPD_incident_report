@@ -13,14 +13,17 @@ Installation of urllib: sudo pipenv install urllib
 Installation of PyPDF2: sudo pipenv install PyPDF2
 Installation of pytest: sudo pipenv install pytest
 
-##How to run
+## How to run
 Run the program:
 pipenv run python project0/main.py --incidents <url>
 
 Run the pytests: 
 pipenv run python -m pytest
 
-##FUNCTIONS
+https://user-images.githubusercontent.com/114453047/223617011-9b61472e-a217-498c-8dbd-acc222a862fb.mp4
+
+
+## FUNCTIONS
 
 fetchincidents(url)
 This function takes the URL as input and stores the pdf file which is in URL in a filename 'inicident_report.pdf'.
@@ -45,7 +48,7 @@ status(db,conn)
 In this function, the database and db connection is taken as input. SQL query is written to meet the final requirement of the project, which is to count the incident nature and print them in sorted manner by count and alphabetically, seperated with '|'.
 This will return the final output which is each nature | count, sorted in order of count(descending) and alphabetically ascending.
 
-#Pytest Functions
+# Pytest Functions
 
 test_fetchincidents(url)
 In this method, we use assert os.path.exists(). This method in Python is used to check whether the specified path exists or not. So using this we check if pdf is extracted from the url and stored in our os. 
@@ -63,17 +66,17 @@ This pytest stores the first two rows of the pdf content as the expected output 
 test_status()
 This pytest checks that the SQL query returns results and that the counts are sorted in descending order.
 
-##Database Development
+## Database Development
 I created two functions - createdb() and populatedb().  
 In createdb(), a  sqllite3 database is created, named it - 'incident_report.db'. c=conn.cursor() creates a cursor object c that allows you to interact with a database using a Connection object conn. Then, created a table using sql query with with PDF column names as the table contents which are : Data/Time, Incident Number, Location, Incident Nature and ORI.
 In populatedb(), I inserted the rows of the pdf text contents using INSERT query in the table incident_report. After the insertion, I close the db connection using conn.close()to free up the memory used for the connection.
 
-##Bugs
+## Bugs
 
 - There are few fields containing multiple lines such as location. My code is not able to detect the multiple lines row correctly. Though it is detecing for few rows, it is not detecting multiple lines of some fields.
 - In the installation of any library, I have to use sudo(root) for installation or else it is not installing successfully. 
 
-##Assumptions
+## Assumptions
 
 - Date is not sperated by a space, Time is not seperated by any space, same with Incident number and  ORI. So their indexes are  :  0, 1, 2 and -1 respectively.
 - Location of an incident and nature have one or multiple spaces. So to detect their indexes, we assume location  does not end with a lower case. 
